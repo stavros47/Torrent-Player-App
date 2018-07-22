@@ -5,18 +5,18 @@ const shell = require('electron').shell;
 // const server = require('./server');
 
 
-function generateAddWindow(){
-  const modalPath = path.join('file://', __dirname, './src/add.html');
-  let wind = new BrowserWindow({
-          frame: true,
-          alwaysOnTop:true,
-          width: 400,
-          height: 200
-      });
-  wind.on('close', function(){ win = null;});
-  wind.loadURL(modalPath);
-  wind.show();
-}
+// function generateAddWindow(){
+//   const modalPath = path.join('file://', __dirname, './src/add.html');
+//   let wind = new BrowserWindow({
+//           frame: true,
+//           alwaysOnTop:true,
+//           width: 400,
+//           height: 200
+//       });
+//   wind.on('close', function(){ win = null;});
+//   wind.loadURL(modalPath);
+//   wind.show();
+// }
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
   let win
