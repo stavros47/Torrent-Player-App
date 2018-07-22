@@ -30,6 +30,7 @@ if(loadMoviesBtn){
 function createComponent(title){
     var div = document.createElement("div");
     div.classList.add("movie");
+    div.classList.add("col-md-12");
    // div.style.width = "300px";
    // div.style.height = "100px";
    // div.style.background = "red";

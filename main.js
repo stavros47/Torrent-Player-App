@@ -29,7 +29,7 @@ const shell = require('electron').shell;
     win.loadFile('src/index.html')
   
     // Open the DevTools.
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
   
     // Emitted when the window is closed.
     win.on('closed', () => {
@@ -45,15 +45,15 @@ const shell = require('electron').shell;
                 label: 'Menu',
                 submenu: [
                     {
-                      label: 'Adjust Notification Value',
+                      label: 'Settings',
                       click(){
-                        generateAddWindow();
+                       //Create Settings window
                       }
                     },
                     {
-                      label: 'CoinMarketCap',
+                      label: 'GitHub',
                       click() {
-                        shell.openExternal('https://coinmarketcap.com/')
+                        shell.openExternal('https://github.com/stavros47/Torrent-Player-App')
                       }
                     },
                     {type: 'separator'},

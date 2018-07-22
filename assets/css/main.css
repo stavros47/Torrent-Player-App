@@ -2,15 +2,21 @@ body {
     background: #262626;
     color: #ffffff;
     margin:0;
+    font-family: 'Roboto', sans-serif;
+    
+    
 }
 
 h1 {
     float:left;
+    text-align: center;
+        
+    font-weight: 700;
 }
 
 button {
     float:left;
-    background: #FF0057;
+    background:#3E50B4/*#FF3F80*/;
     border: none;
     color: #fff;
     text-transform: uppercase;
@@ -27,8 +33,10 @@ button {
     cursor: pointer;
     margin-bottom: 5px;
     display: block;
+    border-radius: 20px;
+
 }
 
 .movie:hover {
-    background: #26b632;
+    background: #3E50B4;
 }
