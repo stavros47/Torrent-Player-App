@@ -26,22 +26,28 @@ button {
     clear: right;
 }
 #main{
-    padding-top:110px;
-   
+    margin-top:20px;
+    text-align: center;
 }
 .movie {
-    transition: box-shadow .08s;
-    float:left;
-    color: #fff;
-    padding: 7px;
-    cursor: pointer;
-    margin-bottom: 5px;
-    display: block;
+    transition: box-shadow .08s;   
+    color: #fff;  
+    cursor: pointer;  
     border-radius: 20px;
+    font-size: 1.5em;
+    padding: 4px;
+    /* float:left;  
+    margin-bottom: 5px;
+    display: block; */
 
 }
 
 .movie:hover {
     background: #3E50B4;
     box-shadow: 0 0 11px rgba(255, 63, 128, 0.692); 
+}
+
+img {
+    width: 100%;
+    height: auto;
 }

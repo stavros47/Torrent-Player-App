@@ -2,6 +2,7 @@
 const handler = require('../handler.js');
 const scraper = require('../scraper.js');
 
+
 function loadMovies(){
     // var xhttp = new XMLHttpRequest();
     // xhttp.onreadystatechange = function() {
@@ -16,9 +17,13 @@ function loadMovies(){
     // xhttp.send();
     scraper
     .getMovies()
-    .then(movies =>{
+    .then(async movies =>{
+       
+        const promises = movies.map(scraper.searchMovie);
+        await Promise.all(promises);
         let moviesContainer = handler.generateMovieComponents(movies);
         document.getElementById("main").appendChild(moviesContainer);
+        console.log(movies);
     });
 }
 
