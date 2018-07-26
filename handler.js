@@ -2,7 +2,7 @@
 function createMovieContainer(){
     var div = document.createElement("div");
     div.classList.add("movieContainer");
-    div.classList.add("col-md-12");
+    div.classList.add("row");
    
     return div;
 }
@@ -15,12 +15,12 @@ function createMovieComponent(movie){
     var div = document.createElement("div");
     div.classList.add("movie");
     //div.classList.add("row");
-    div.classList.add("col-md-12");
+    div.classList.add("col-md-2");
     div.innerHTML = movieTitle;
     
     div.addEventListener('click', function(){
         var exec = require('child_process').exec;
-        console.log(link);
+        console.log(movieLink);
         exec(`peerflix \"${movieLink}\" --vlc`, function(error, stdout, stderr) {
             console.log('stdout: ' + stdout);
             console.log('stderr: ' + stderr);
@@ -30,11 +30,14 @@ function createMovieComponent(movie){
         });
     });
 
-    div.addEventListener('mouseover', function(){
-        let poster = new Image(200,200);
-        poster.src = moviePoster;
-       document.getElementById('poster').src = poster.src;
-    });
+    // div.addEventListener('mouseover', function(){
+    //     let poster = new Image(200,200);
+    //     poster.src = moviePoster;
+    //     if(moviePoster && document.getElementById('poster')){
+    //         document.getElementById('poster').src = poster.src;
+    //     }
+       
+    // });
 
     return div;
 

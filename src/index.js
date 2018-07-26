@@ -19,8 +19,8 @@ function loadMovies(){
     .getMovies()
     .then(async movies =>{
        
-        const promises = movies.map(scraper.searchMovie);
-        await Promise.all(promises);
+        //const promises = movies.map(scraper.searchMovie);
+        //await Promise.all(promises);
         let moviesContainer = handler.generateMovieComponents(movies);
         document.getElementById("main").appendChild(moviesContainer);
         console.log(movies);
