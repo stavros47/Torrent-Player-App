@@ -1,20 +1,15 @@
 const cheerio = require('cheerio');
-const Table = require('cli-table');
 const fetch = require('node-fetch');
 var ptn = require('parse-torrent-name');
 
+//var url = 'http://sg.media-imdb.com/suggests/' + searchTerm.charAt(0) + '/' + encodeURIComponent(searchTerm)  + '.json'
 
 var options = {
-    imdbURL:'https://www.imdb.com/find?s=all&q=',
+    imdbURL:'http://sg.media-imdb.com/suggests/',
     url:"https://thepiratebay.org/top/207",
     json: false
 }
 
-var table = new Table({
-    head : ['#','Title', 'Rating'],
-    colWidths: [4,35, 20,],
-    style: { 'padding-left': 0, 'padding-right': 0 }
-});
 
 const movies = [];
 
@@ -46,30 +41,19 @@ function getMovies(){
     });
 }
 
-function getMoviePoster(){
-    return fetch(`${options.url}`)
+function getMoviePoster(searchTerm){
+    //console.log(searchTerm.title.charAt(0));
+    return fetch(`${options.imdbURL}${searchTerm.title.charAt(0).toLowerCase()}/${encodeURIComponent(searchTerm.title.replace(/[_-]/g, ""))}.json`)
     .then(response => response.text())
-    .then(body => {
-       
-        const $ = cheerio.load(body);
-       
-        var rows = $("#searchResult").children('tbody').children();
-        rows.each(function(i, element){
-            const $titleRow = $(this).children('td').eq(1).find(".detName").find("a");
-            const $title = $titleRow.text();
-            const $link = $(this).children('td').eq(1).children('a').eq(0).attr('href');
-            if($title){
-                const movie = {
-                    title: $title,
-                    link: $link
-                }
-                movies.push(movie);
-            }
+    .then((data)=>{
+       // console.log(searchTerm.title,JSON.parse(data.toString().match(/{.*}/g)));
+        let json = JSON.parse(data.toString().match(/{.*}/g));
+        let image = json.d[0].i[0];
+        //console.log(searchTerm.title,image);
+        searchTerm.image = image;
             
-        });
-       
-        return movies;
-    });
+       return searchTerm;
+    });    
 }
 
 //Get top 250 movies - //"https://www.imdb.com/chart/top"
@@ -95,32 +79,10 @@ function getTopMovies(){
 }
 
 
-function searchMovie(searchTerm){
-    return fetch(`${options.imdbURL}${searchTerm.title}`)
-    .then(response => response.text())
-    .then(body =>{
-        const $ = cheerio.load(body);
-        // $('.findResult').each(function(i,element){
-        //     const $element = $(element);
-        //     const $image = $element.find('td a img');
-        //     let image = $image.attr('src');
-        // });
-        
-            const $element = $('.findResult');
-            const $image = $element.find('td a img');
-            let image = $image.attr('src');
-            searchTerm.image = image;
-            
-            return searchTerm;
-    });
-}
-
-
-
 module.exports = {
     getTopMovies,
     getMovies,
-    searchMovie
+    getMoviePoster
 }
 
 
