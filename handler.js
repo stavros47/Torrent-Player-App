@@ -27,16 +27,34 @@ function createMovieComponent(movie){
     thumb.appendChild(elem);
     div.appendChild(thumb);
     
+    //https://medium.freecodecamp.org/node-js-child-processes-everything-you-need-to-know-e69498fe970a
     div.addEventListener('click', function(){
-        var exec = require('child_process').exec;
+        //var spawn = require('child_process').spawn;
+        const { spawn } = require('child_process');
+        const child = spawn(`peerflix \"${movieLink}\" --vlc`, {
+            detached: true,
+            stdio: 'ignore',
+            shell: true,
+            windowsHide: true
+          });
+
+          child.on('error', (err) => {
+            console.log('Failed to start subprocess. ');
+            console.log(err);
+          });
+
+          child.on('exit', function (code, signal) {
+            console.log('child process exited with ' +
+                        `code ${code} and signal ${signal}`);
+          });
         //console.log(movieLink);
-        exec(`peerflix \"${movieLink}\" --vlc`, function(error, stdout, stderr) {
-            console.log('stdout: ' + stdout);
-            console.log('stderr: ' + stderr);
-            if (error !== null) {
-                console.log('exec error: ' + error);
-            }
-        });
+        // exec(`peerflix \"${movieLink}\" --vlc`, function(error, stdout, stderr) {
+        //     console.log('stdout: ' + stdout);
+        //     console.log('stderr: ' + stderr);
+        //     if (error !== null) {
+        //         console.log('exec error: ' + error);
+        //     }
+        // });
     }); 
 
     return div;
