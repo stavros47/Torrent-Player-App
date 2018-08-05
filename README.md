@@ -9,7 +9,7 @@ npm start
 ```
 It will execute the `elecron .` command and open the main window.
 Currently the scraper , scrapes PrtBay for 100 movie titles and their magnet links.
-Then it uses [Peerflix](https://www.npmjs.com/package/peerflix)  to open and stream them on VLC or MPlayer(**default**).
+Then it uses [Peerflix](https://www.npmjs.com/package/peerflix)  to open and stream them on (**default**) or MPlayer.
 
 The plan is to remove peerflix at some point and implement streaming natively using another bitTorrent streaming library, 
 for example [torrent-stream](https://github.com/mafintosh/torrent-stream)

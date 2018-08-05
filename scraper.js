@@ -42,15 +42,16 @@ function getMovies(){
 }
 
 function getMoviePoster(searchTerm){
-    //console.log(searchTerm.title.charAt(0));
     return fetch(`${options.imdbURL}${searchTerm.title.charAt(0).toLowerCase()}/${encodeURIComponent(searchTerm.title.replace(/[_-]/g, ""))}.json`)
     .then(response => response.text())
-    .then((data)=>{
-       // console.log(searchTerm.title,JSON.parse(data.toString().match(/{.*}/g)));
-        let json = JSON.parse(data.toString().match(/{.*}/g));
-        let image = json.d[0].i[0];
-        //console.log(searchTerm.title,image);
+    .then((data)=>{      
+        let json = data ? JSON.parse(data.toString().match(/{.*}/g)) : "";
+        //console.log(searchTerm.title,json);
+        let image = json ? (json.d[0].i[0] ? json.d[0].i[0] : "") : "";
+        let id = json ? (json.d[0].id ? json.d[0].id : ""): "";
+
         searchTerm.image = image;
+        searchTerm.imdbID = id;
             
        return searchTerm;
     });    

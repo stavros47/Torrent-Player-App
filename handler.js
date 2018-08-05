@@ -1,4 +1,4 @@
-
+const { settings } = require('./config/config');
 function createMovieContainer(){
     var div = document.createElement("div");
     div.classList.add("movieContainer");
@@ -29,13 +29,13 @@ function createMovieComponent(movie){
     
     //https://medium.freecodecamp.org/node-js-child-processes-everything-you-need-to-know-e69498fe970a
     div.addEventListener('click', function(){
-        //var spawn = require('child_process').spawn;
         const { spawn } = require('child_process');
         const child = spawn(`peerflix \"${movieLink}\" --vlc`, {
             detached: true,
-            stdio: 'ignore',
-            shell: true,
-            windowsHide: true
+            stdio: 'inherit',
+            windowsHide: true,
+            shell: true
+            
           });
 
           child.on('error', (err) => {
@@ -61,7 +61,7 @@ function createMovieComponent(movie){
 }
 
 function generateMovieComponents(jsonArray){
-
+    
     var movieContainer = createMovieContainer();
 
     for(i = 0; i < jsonArray.length; i++){

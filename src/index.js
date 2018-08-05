@@ -2,6 +2,8 @@
 const handler = require('../handler.js');
 const scraper = require('../scraper.js');
 const _ = require('underscore');
+const { settings } = require('../config/config');
+
 
 function loadMovies(){
  
@@ -23,3 +25,10 @@ loadMoviesBtn = document.getElementById("loadMoviesBtn");
 if(loadMoviesBtn){ 
     loadMoviesBtn.addEventListener('click', loadMovies);
 }
+
+var select = document.getElementById('subtitles');
+
+select.addEventListener('change', ()=>{
+    console.log(select.value);
+    settings.subtitles = select.value;
+});
