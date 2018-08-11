@@ -10,7 +10,6 @@ var options = {
     json: false
 }
 
-
 const movies = [];
 
 //get piratebay movies and their links

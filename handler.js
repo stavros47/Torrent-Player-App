@@ -1,4 +1,7 @@
 const { settings } = require('./config/config');
+const scraper = require('./scraper.js');
+const _ = require('underscore');
+
 function createMovieContainer(){
     var div = document.createElement("div");
     div.classList.add("movieContainer");
@@ -47,14 +50,7 @@ function createMovieComponent(movie){
             console.log('child process exited with ' +
                         `code ${code} and signal ${signal}`);
           });
-        //console.log(movieLink);
-        // exec(`peerflix \"${movieLink}\" --vlc`, function(error, stdout, stderr) {
-        //     console.log('stdout: ' + stdout);
-        //     console.log('stderr: ' + stderr);
-        //     if (error !== null) {
-        //         console.log('exec error: ' + error);
-        //     }
-        // });
+
     }); 
 
     return div;
@@ -73,6 +69,23 @@ function generateMovieComponents(jsonArray){
     return movieContainer;
 }
 
+function loadMovies(){ 
+    scraper
+    .getMovies()
+    .then(async movies =>{
+       
+        const promises = movies.map(scraper.getMoviePoster);
+        await Promise.all(promises);
+        let myMovies = _.uniq(movies, 'title');//Remove duplicates
+        let moviesContainer = generateMovieComponents(myMovies);
+        if(document.getElementById("main") && moviesContainer){
+            document.getElementById("main").appendChild(moviesContainer);
+        }
+       //console.log(myMovies);
+    });
+}
+
 module.exports = {
-    generateMovieComponents
+    generateMovieComponents,
+    loadMovies
 }
