@@ -2,6 +2,7 @@
 Stream your favourite movies
 
 ##How it works
+
 Scrape movies from a provider(Title and magnet link) and then scrape their posters from IMDB
 Present the movie posters in a window(as a grid) and then stream them while downloading using [Peerflix](https://www.npmjs.com/package/peerflix).
 
@@ -9,8 +10,8 @@ Currently the scraper , scrapes PrtBay for top 100 HD movies
 
 ## Quick Start - Notes
 
-it is not packaged yet to use just clone the repository and install dependencies and run
-Opens/streams in a new (**default**) or VLC (optional).
+it is not packaged yet, so to use just clone the repository and then install dependencies and run.
+Opens/streams in a new window (**default**) or VLC (optional).
 
 ```sh
 npm install
@@ -22,9 +23,8 @@ The main plan is to remove peerflix at some point and implement streaming native
 
 ---
 
-**Possible canditated for native torrent streaming implementation:** 
-> [webtorrent](https://github.com/webtorrent/webtorrent) (**Most likely**)
-> [torrent-stream](https://github.com/mafintosh/torrent-stream)
+**Possible candidate for native torrent streaming implementation:** 
+> [webtorrent](https://github.com/webtorrent/webtorrent)
 
 ---
 
@@ -38,7 +38,8 @@ This project is for my personal education purposes, mainly for creating a featur
 * **Expand JS Knowledge** using ElectronJS and NodeJS with express.
 * **Implement a React based UI** (Not yet implemented)
 
-###To Do:
+##To Do:
+
     * Create a Settings window to provide adjustable settings e.x subtitle language, default player, movie provider etc
     * Adjust the video player to scale according to it's parent window.
     * Add subtitle support using the OpenSubtitles API
