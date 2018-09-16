@@ -1,7 +1,7 @@
 # Torrent Player App
 Stream your favourite movies
 
-##How it works
+## How it works
 
 Scrape movies from a provider(Title and magnet link) and then scrape their posters from IMDB
 Present the movie posters in a window(as a grid) and then stream them while downloading using [Peerflix](https://www.npmjs.com/package/peerflix).
@@ -38,7 +38,7 @@ This project is for my personal education purposes, mainly for creating a featur
 * **Expand JS Knowledge** using ElectronJS and NodeJS with express.
 * **Implement a React based UI** (Not yet implemented)
 
-##To Do:
+### To Do:
 
     * Create a Settings window to provide adjustable settings e.x subtitle language, default player, movie provider etc
     * Adjust the video player to scale according to it's parent window.
