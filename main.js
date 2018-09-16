@@ -1,22 +1,27 @@
 const {app, BrowserWindow, Menu} = require('electron');
 const path = require('path');
 const shell = require('electron').shell;
-// const ipc = require('electron').ipcMain;
+const ipc = require('electron').ipcMain;
 // const server = require('./server');
 
+let playWindow;
+function generatePlayWindow(){
+  const modalPath = path.join('file://', __dirname, './src/play.html');
+  playWindow = new BrowserWindow({
+          frame: false,
+          alwaysOnTop:false,
+          width: 1055,
+          height: 520,
+          show: false
+      });
+      playWindow.on('close', function(){ win = null;});
+      playWindow.loadURL(modalPath);
+      playWindow.webContents.openDevTools();
 
-// function generateAddWindow(){
-//   const modalPath = path.join('file://', __dirname, './src/add.html');
-//   let wind = new BrowserWindow({
-//           frame: true,
-//           alwaysOnTop:true,
-//           width: 400,
-//           height: 200
-//       });
-//   wind.on('close', function(){ win = null;});
-//   wind.loadURL(modalPath);
-//   wind.show();
-// }
+  //playWindow.show();
+      
+  return playWindow;
+}
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
   let win
@@ -69,6 +74,7 @@ const shell = require('electron').shell;
     ])
 
     Menu.setApplicationMenu(menu);
+    //generatePlayWindow();
 
   }
   
@@ -96,6 +102,22 @@ const shell = require('electron').shell;
     }
   })
   
-  // ipc.on('update-notify-value', (event,arg) => {
-  //   win.webContents.send('targetPriceVal', arg)
-  // })
+  ipc.on('play', (event,arg) => {
+  
+    // win.webContents.send('targetPriceVal', arg);
+    //playWindow.show();
+   // 
+    var playWindow = generatePlayWindow();
+    playWindow.once('ready-to-show', () => {
+      playWindow.show();
+      setTimeout(()=>{
+        playWindow.webContents.send('torrent', arg);
+      },3000);
+    });
+
+    
+      
+  
+  
+    
+  })

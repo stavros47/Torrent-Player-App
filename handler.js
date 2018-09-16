@@ -1,6 +1,8 @@
 const { settings } = require('./config/config');
 const scraper = require('./scraper.js');
 const _ = require('underscore');
+const electron = require('electron');
+const ipc = electron.ipcRenderer;
 
 function createMovieContainer(){
     var div = document.createElement("div");
@@ -32,24 +34,26 @@ function createMovieComponent(movie){
     
     //https://medium.freecodecamp.org/node-js-child-processes-everything-you-need-to-know-e69498fe970a
     div.addEventListener('click', function(){
-        const { spawn } = require('child_process');
-        const child = spawn(`peerflix \"${movieLink}\" --vlc`, {
-            detached: true,
-            stdio: 'inherit',
-            windowsHide: true,
-            shell: true
+
+        ipc.send('play', movieLink);
+        // const { spawn } = require('child_process');
+        // const child = spawn(`peerflix \"${movieLink}\" --vlc`, {
+        //     detached: true,
+        //     stdio: 'inherit',
+        //     windowsHide: true,
+        //     shell: true
             
-          });
+        //   });
 
-          child.on('error', (err) => {
-            console.log('Failed to start subprocess. ');
-            console.log(err);
-          });
+        //   child.on('error', (err) => {
+        //     console.log('Failed to start subprocess. ');
+        //     console.log(err);
+        //   });
 
-          child.on('exit', function (code, signal) {
-            console.log('child process exited with ' +
-                        `code ${code} and signal ${signal}`);
-          });
+        //   child.on('exit', function (code, signal) {
+        //     console.log('child process exited with ' +
+        //                 `code ${code} and signal ${signal}`);
+        //   });
 
     }); 
 

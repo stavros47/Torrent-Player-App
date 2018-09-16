@@ -1,6 +1,6 @@
-
 const handler = require('../handler.js');
-
+const electron = require('electron');
+const ipc = electron.ipcRenderer;
 const { settings } = require('../config/config');
 
 loadMoviesBtn = document.getElementById("loadMoviesBtn");
