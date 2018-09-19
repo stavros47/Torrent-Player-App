@@ -11,7 +11,7 @@ if(loadMoviesBtn){
 
 var select = document.getElementById('subtitles');
 
-select.addEventListener('change', ()=>{
-    console.log(select.value);
+select.addEventListener('change', ()=>{   
     settings.subtitles = select.value;
+    console.log(settings.subtitles);
 });

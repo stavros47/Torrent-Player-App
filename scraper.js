@@ -35,7 +35,7 @@ function getMovies(){
             }
             
         });
-        
+        console.log(movies);
         return movies;
     });
 }

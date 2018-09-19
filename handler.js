@@ -13,6 +13,7 @@ function createMovieContainer(){
 }
 
 function createMovieComponent(movie){
+    //console.log(`Movie: ${movie.title}`);
     let movieTitle = movie.title;
     let movieLink = movie.link;
     let moviePoster = movie.image;
@@ -61,7 +62,7 @@ function createMovieComponent(movie){
 }
 
 function generateMovieComponents(jsonArray){
-    
+    //console.log(`Array: ${jsonArray}`);
     var movieContainer = createMovieContainer();
 
     for(i = 0; i < jsonArray.length; i++){
@@ -74,17 +75,21 @@ function generateMovieComponents(jsonArray){
 }
 
 function loadMovies(){ 
+    //console.log('Loading Movies...')
     scraper
     .getMovies()
     .then(async movies =>{
        
         const promises = movies.map(scraper.getMoviePoster);
-        await Promise.all(promises);
-        let myMovies = _.uniq(movies, 'title');//Remove duplicates
-        let moviesContainer = generateMovieComponents(myMovies);
-        if(document.getElementById("main") && moviesContainer){
-            document.getElementById("main").appendChild(moviesContainer);
-        }
+        await Promise.all(promises)
+        .then((myMovies)=>{
+            myMovies = _.uniq(myMovies, 'title');//Remove duplicates
+            let moviesContainer = generateMovieComponents(myMovies);
+            if(document.getElementById("main") && moviesContainer){
+                document.getElementById("main").appendChild(moviesContainer);
+            }
+        }).catch(e => console.log(`Error: ${e}`));
+       
        //console.log(myMovies);
     });
 }
